@@ -531,7 +531,14 @@
       authority: `https://login.microsoftonline.com/${TENANT_ID}`,
       redirectUri: 'https://draperit.github.io/draper-it-calendar/'
     },
-    cache: { cacheLocation: 'sessionStorage' }
+    cache: { cacheLocation: 'sessionStorage' },
+    system: {
+      allowNativeBroker: false,
+      windowHashTimeout: 9000,
+      iframeHashTimeout: 9000,
+      loadFrameTimeout: 9000,
+      asyncPopups: false
+    }
   };
 
   const msalInstance = new msal.PublicClientApplication(msalConfig);
@@ -542,18 +549,21 @@
   async function getToken() {
     const accounts = msalInstance.getAllAccounts();
     if (accounts.length === 0) {
-      // Use redirect instead of popup to avoid popup blockers
+      setStatus('Redirecting to Microsoft login…');
       await msalInstance.loginRedirect({ scopes: SCOPES });
-      return null; // page will redirect, execution stops here
-    }
-    currentAccount = msalInstance.getAllAccounts()[0];
-    const result = await msalInstance.acquireTokenSilent({
-      scopes: SCOPES, account: currentAccount
-    }).catch(async () => {
-      await msalInstance.acquireTokenRedirect({ scopes: SCOPES });
       return null;
-    });
-    return result ? result.accessToken : null;
+    }
+    currentAccount = accounts[0];
+    try {
+      const result = await msalInstance.acquireTokenSilent({
+        scopes: SCOPES, account: currentAccount
+      });
+      return result.accessToken;
+    } catch(e) {
+      setStatus('Refreshing login…');
+      await msalInstance.acquireTokenRedirect({ scopes: SCOPES, account: currentAccount });
+      return null;
+    }
   }
 
   async function graphGet(url) {
