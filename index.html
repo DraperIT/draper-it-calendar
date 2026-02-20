@@ -972,14 +972,22 @@
     const note = document.getElementById('eventNote').value.trim();
     const ev = { id: uid(), type: selectedType, name, note, startDate, endDate };
 
-    closeModal();
+    // Show saving state on button
+    const saveBtn = document.querySelector('.btn-save');
+    saveBtn.textContent = 'Saving…';
+    saveBtn.disabled = true;
 
     try {
       await saveEventToSharePoint(ev);
       allEvents.push(ev);
+      closeModal();
       render();
     } catch(err) {
-      alert('Failed to save to SharePoint: ' + err.message);
+      console.error('Save error:', err);
+      alert('Failed to save: ' + err.message);
+    } finally {
+      saveBtn.textContent = 'Add to Calendar';
+      saveBtn.disabled = false;
     }
   }
 
