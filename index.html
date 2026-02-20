@@ -479,9 +479,42 @@
   </div>
 </div>
 
-<script src="https://unpkg.com/@azure/msal-browser@2.38.3/lib/msal-browser.min.js"></script>
+<script>
+// Try loading MSAL from multiple CDNs with fallback
+(function() {
+  const cdns = [
+    'https://unpkg.com/@azure/msal-browser@2.38.3/lib/msal-browser.min.js',
+    'https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.38.3/lib/msal-browser.min.js',
+    'https://alcdn.msauth.net/browser/2.38.3/js/msal-browser.min.js',
+    'https://alcdn.msftauth.net/browser/2.38.3/js/msal-browser.min.js'
+  ];
+  
+  function tryLoad(index) {
+    if (index >= cdns.length) {
+      document.getElementById('statusMsg').textContent = '❌ Could not load authentication library. Please check your internet connection.';
+      document.getElementById('statusMsg').style.display = 'block';
+      document.getElementById('statusMsg').style.color = '#ef4444';
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = cdns[index];
+    script.onload = function() {
+      console.log('MSAL loaded from: ' + cdns[index]);
+      initCalendar();
+    };
+    script.onerror = function() {
+      console.warn('Failed to load MSAL from: ' + cdns[index]);
+      tryLoad(index + 1);
+    };
+    document.head.appendChild(script);
+  }
+  
+  tryLoad(0);
+})();
+</script>
 <script>
   // ── SharePoint / MSAL Config ──
+  function initCalendar() {
   const TENANT_ID   = '8468f04e-ed1d-433f-99d9-2641bb0f49f6';
   const CLIENT_ID   = '72e81aaf-8551-41b3-b12f-966e31b08383';
   const SITE_URL    = 'https://drapertoolsltd.sharepoint.com/sites/techsupport';
@@ -509,13 +542,18 @@
   async function getToken() {
     const accounts = msalInstance.getAllAccounts();
     if (accounts.length === 0) {
-      await msalInstance.loginPopup({ scopes: SCOPES });
+      // Use redirect instead of popup to avoid popup blockers
+      await msalInstance.loginRedirect({ scopes: SCOPES });
+      return null; // page will redirect, execution stops here
     }
     currentAccount = msalInstance.getAllAccounts()[0];
     const result = await msalInstance.acquireTokenSilent({
       scopes: SCOPES, account: currentAccount
-    }).catch(() => msalInstance.acquireTokenPopup({ scopes: SCOPES }));
-    return result.accessToken;
+    }).catch(async () => {
+      await msalInstance.acquireTokenRedirect({ scopes: SCOPES });
+      return null;
+    });
+    return result ? result.accessToken : null;
   }
 
   async function graphGet(url) {
@@ -961,12 +999,19 @@
   });
 
   // ── Boot: handle MSAL redirect then load events ──
-  msalInstance.handleRedirectPromise().then(() => {
+  msalInstance.handleRedirectPromise().then((response) => {
+    if (response) {
+      // Coming back from a redirect login
+      currentAccount = response.account;
+    }
     render(); // render empty grid immediately
     loadEvents().catch(err => {
       setStatus('❌ ' + err.message, true);
     });
+  }).catch(err => {
+    setStatus('❌ Auth error: ' + err.message, true);
   });
+  } // end initCalendar
 </script>
 </body>
 </html>
