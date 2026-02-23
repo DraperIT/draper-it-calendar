@@ -677,12 +677,12 @@
     );
     allEvents = data.value.map(item => ({
       id:        item.id,
-      type:      item.fields.EventType      || '',
-      name:      item.fields.EventName      || '',
-      note:      item.fields.Note           || '',
-      startDate: item.fields.StartDate      || '',
-      endDate:   item.fields.EndDate        || ''
-    }));
+      type:      item.fields.Category   || '',
+      name:      item.fields.Title      || '',
+      note:      item.fields.Description || '',
+      startDate: item.fields.EventDate  ? item.fields.EventDate.substring(0,10) : '',
+      endDate:   item.fields.EndDate    ? item.fields.EndDate.substring(0,10)   : ''
+    })).filter(ev => ev.startDate); // only include items with a date
     setStatus('');
     render();
   }
@@ -693,12 +693,12 @@
     const created = await graphPost(
       `${GRAPH_BASE}/sites/${graphSiteId}/lists/${graphListId}/items`,
       { fields: {
-        Title:     ev.name,
-        EventType: ev.type,
-        EventName: ev.name,
-        StartDate: ev.startDate,
-        EndDate:   ev.endDate,
-        Note:      ev.note
+        Title:       ev.name,
+        Category:    ev.type,
+        EventDate:   ev.startDate + 'T00:00:00Z',
+        EndDate:     ev.endDate   + 'T00:00:00Z',
+        Description: ev.note,
+        fAllDayEvent: true
       }}
     );
     // Update local id to the SharePoint item id
