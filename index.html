@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Draper IT Calendar</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg:#0d0f14;--surface:#13161d;--surface2:#1a1e28;--border:#252a38;
@@ -16,7 +16,7 @@
     --bank-holiday:#fbbf24;--bank-holiday-bg:rgba(251,191,36,0.42);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;padding:40px 16px 8px}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;padding:40px 16px 8px}
   header{display:flex;align-items:center;justify-content:space-between;margin-bottom:70px;gap:12px}
   .brand-wrap{display:flex;align-items:center;gap:10px}
   .cyber-cat{position:relative;width:36px;height:36px;flex-shrink:0}
@@ -31,7 +31,7 @@
   .month-label{font-size:22px;font-weight:800;letter-spacing:-1px;min-width:180px;text-align:center}
   .nav-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text);width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background 0.15s;flex-shrink:0}
   .nav-btn:hover{background:var(--border)}
-  .today-btn{background:var(--accent);border:none;color:#fff;padding:0 10px;height:28px;border-radius:6px;cursor:pointer;font-family:'Syne',sans-serif;font-weight:600;font-size:11px;white-space:nowrap}
+  .today-btn{background:var(--accent);border:none;color:#fff;padding:0 10px;height:28px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;font-size:11px;white-space:nowrap}
   .live-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;display:inline-block;margin-right:5px;animation:pulse 2s infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
   .header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
@@ -73,12 +73,12 @@
   .modal-subtitle{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:20px}
   .form-group{margin-bottom:15px}
   label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
-  input,textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Syne',sans-serif;font-size:14px;padding:10px 13px;outline:none;transition:border-color 0.15s;-webkit-appearance:none}
+  input,textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;padding:10px 13px;outline:none;transition:border-color 0.15s;-webkit-appearance:none}
   input:focus,textarea:focus{border-color:var(--accent)}
   textarea{resize:vertical;min-height:65px}
   input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.6);cursor:pointer}
   .date-mode-toggle{display:flex;gap:8px;margin-bottom:12px}
-  .toggle-btn{flex:1;background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:8px;border-radius:9px;cursor:pointer;font-family:'Syne',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;transition:all 0.15s;text-align:center}
+  .toggle-btn{flex:1;background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:8px;border-radius:9px;cursor:pointer;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;transition:all 0.15s;text-align:center}
   .toggle-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
   .date-range-row{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}
   .date-range-arrow{color:var(--muted);font-size:20px;text-align:center;padding-bottom:10px}
@@ -92,8 +92,8 @@
   .type-option.selected-task{background:var(--task-bg);border-color:var(--task);color:var(--task)}
   .type-option.selected-bank-holiday{background:var(--bank-holiday-bg);border-color:var(--bank-holiday);color:var(--bank-holiday)}
   .modal-actions{display:flex;gap:10px;margin-top:20px}
-  .btn-cancel{flex:1;background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:12px;border-radius:10px;cursor:pointer;font-family:'Syne',sans-serif;font-weight:600;font-size:14px}
-  .btn-save{flex:2;background:var(--accent);border:none;color:#fff;padding:12px;border-radius:10px;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:14px}
+  .btn-cancel{flex:1;background:var(--surface2);border:1px solid var(--border);color:var(--muted);padding:12px;border-radius:10px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;font-size:14px}
+  .btn-save{flex:2;background:var(--accent);border:none;color:#fff;padding:12px;border-radius:10px;cursor:pointer;font-family:'Inter',sans-serif;font-weight:700;font-size:14px}
   .btn-save:disabled{opacity:.5;cursor:not-allowed}
 </style>
 </head>
@@ -136,7 +136,7 @@
   <div class="header-right">
     <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)"><span class="live-dot"></span><span id="todayLabel"></span></span>
     <div id="statusMsg" style="display:none;font-family:'DM Mono',monospace;font-size:11px;padding:6px 12px;border-radius:6px;border:1px solid;line-height:1.5;max-width:500px;white-space:pre-wrap;"></div>
-    <button class="today-btn" onclick="goToday()">This Month</button>
+    <button class="today-btn" onclick="goToday()">This Week</button>
   </div>
 </header>
 
@@ -332,27 +332,37 @@ function deleteFromSP(spId){
 
 function render(){
   var today=new Date();today.setHours(0,0,0,0);
-  var ref=new Date(today.getFullYear(),today.getMonth()+monthOffset,1);
-  var year=ref.getFullYear(),month=ref.getMonth();
-  document.getElementById('monthLabel').textContent=MONTH_NAMES[month]+' '+year;
+
+  // Rolling 4 weeks: start from Monday of current week + offset
+  var dow=today.getDay(),daysToMon=dow===0?-6:1-dow;
+  var weekStart=new Date(today);weekStart.setDate(today.getDate()+daysToMon+(monthOffset*7));
+
+  var endDate=new Date(weekStart);endDate.setDate(weekStart.getDate()+27); // 4 weeks = 28 days
+
+  // Label showing date range
+  var startLabel=weekStart.toLocaleDateString('en-GB',{day:'numeric',month:'long'});
+  var endLabel=endDate.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('monthLabel').textContent=startLabel+' \u2013 '+endLabel;
   document.getElementById('todayLabel').textContent=today.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'});
+
   var dn=document.getElementById('dayNames');dn.innerHTML='';
   DAY_NAMES.forEach(function(n){var c=document.createElement('div');c.className='day-name-cell';c.textContent=n;dn.appendChild(c)});
+
   var grid=document.getElementById('monthGrid');grid.innerHTML='';
-  var first=new Date(year,month,1),fdow=first.getDay(),fcol=fdow===0?6:fdow-1;
-  for(var s=0;s<(fcol<=4?fcol:0);s++){var sp=document.createElement('div');sp.className='day-cell';sp.style.visibility='hidden';sp.style.pointerEvents='none';grid.appendChild(sp)}
-  var cur=new Date(first);
-  while(cur.getMonth()===month){
-    var dow=cur.getDay();
-    if(dow!==0&&dow!==6){
+
+  var cur=new Date(weekStart);
+  for(var week=0;week<4;week++){
+    for(var d=0;d<5;d++){
       var date=new Date(cur),key=dateKey(date),isToday=key===dateKey(today);
       var cell=document.createElement('div');cell.className='day-cell'+(isToday?' is-today':'');
       var hdr=document.createElement('div');hdr.className='day-cell-header';
-      var num=document.createElement('div');num.className='day-num';num.textContent=date.getDate();
+      var num=document.createElement('div');num.className='day-num';
+      // Show day + month abbrev so context is clear across month boundaries
+      num.textContent=date.getDate()+' '+date.toLocaleDateString('en-GB',{month:'short'});
       var addBtn=document.createElement('button');addBtn.className='day-add';addBtn.textContent='+';addBtn.title='Add item';
-      (function(k,d){addBtn.onclick=function(e){e.stopPropagation();openModal(k,d)}})(key,date);
+      (function(k,dt){addBtn.onclick=function(e){e.stopPropagation();openModal(k,dt)}})(key,date);
       hdr.appendChild(num);hdr.appendChild(addBtn);cell.appendChild(hdr);
-      (function(k,d){cell.onclick=function(){openModal(k,d)}})(key,date);
+      (function(k,dt){cell.onclick=function(){openModal(k,dt)}})(key,date);
       var wrap=document.createElement('div');wrap.className='day-events-wrap';
       var bh=UK_BH[key];
       if(bh){
@@ -374,8 +384,9 @@ function render(){
       });
       if(hidden>0){var more=document.createElement('div');more.className='overflow-pill';more.textContent='+'+hidden+' more';wrap.appendChild(more)}
       cell.appendChild(wrap);grid.appendChild(cell);
+      cur.setDate(cur.getDate()+1);
     }
-    cur.setDate(cur.getDate()+1);
+    cur.setDate(cur.getDate()+2); // skip weekend
   }
 }
 
