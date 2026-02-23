@@ -16,8 +16,8 @@
     --bank-holiday:#fbbf24;--bank-holiday-bg:rgba(251,191,36,0.42);
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;padding:20px 24px}
-  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:16px}
+  body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;padding:12px 24px}
+  header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:16px}
   .brand-wrap{display:flex;align-items:center;gap:14px}
   .cyber-cat{position:relative;width:52px;height:52px;flex-shrink:0}
   .cyber-cat::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:radial-gradient(circle,rgba(79,142,247,0.55) 0%,rgba(79,142,247,0.18) 50%,transparent 75%);animation:catGlow 3s ease-in-out infinite;filter:blur(4px)}
@@ -35,13 +35,13 @@
   .live-dot{width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block;margin-right:6px;animation:pulse 2s infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
   .header-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  .legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:8px;align-items:center}
   .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
   .legend-dot{width:9px;height:9px;border-radius:2px}
   .day-names{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:6px}
   .day-name-cell{text-align:center;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);padding:6px 0}
-  .month-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
-  .day-cell{background:var(--surface);border:1px solid var(--border);border-radius:10px;min-height:180px;display:flex;flex-direction:column;overflow:hidden;transition:border-color 0.15s;cursor:pointer;position:relative}
+  .month-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+  .day-cell{background:var(--surface);border:1px solid var(--border);border-radius:10px;min-height:120px;display:flex;flex-direction:column;overflow:hidden;transition:border-color 0.15s;cursor:pointer;position:relative}
   .day-cell:hover{border-color:var(--muted)}
   .day-cell.is-today{border-color:var(--accent)}
   .day-cell.is-today .day-num{color:var(--accent)}
