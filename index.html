@@ -592,7 +592,19 @@
     if (!res.ok) throw new Error(`Graph DELETE failed: ${res.status} ${await res.text()}`);
   }
 
-  async function getSiteAndListId() {
+  function normaliseType(raw) {
+    if (!raw) return 'task';
+    const val = raw.toLowerCase().replace(/[\s_-]+/g, '-');
+    const valid = ['new-starter', 'leaver', 'holiday', 'task', 'bank-holiday'];
+    if (valid.includes(val)) return val;
+    // Try partial matches
+    if (val.includes('new') || val.includes('starter')) return 'new-starter';
+    if (val.includes('leav'))                            return 'leaver';
+    if (val.includes('holiday') || val.includes('leave')) return 'holiday';
+    if (val.includes('bank'))                            return 'bank-holiday';
+    if (val.includes('train'))                           return 'task';
+    return 'task'; // default
+  }
     if (graphSiteId && graphListId) return;
     setStatus('Connecting to SharePoint…');
 
@@ -677,7 +689,7 @@
     );
     allEvents = data.value.map(item => ({
       id:        item.id,
-      type:      item.fields.Category   || '',
+      type:      normaliseType(item.fields.Category),
       name:      item.fields.Title      || '',
       note:      item.fields.Description || '',
       startDate: item.fields.EventDate  ? item.fields.EventDate.substring(0,10) : '',
