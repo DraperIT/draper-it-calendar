@@ -1005,6 +1005,16 @@
   function changeMonth(dir) { monthOffset += dir; render(); }
   function goToday()        { monthOffset = 0;    render(); }
 
+  // ── Expose functions to global scope for HTML onclick attributes ──
+  window.changeMonth  = changeMonth;
+  window.goToday      = goToday;
+  window.openModal    = openModal;
+  window.closeModal   = closeModal;
+  window.selectType   = selectType;
+  window.setDateMode  = setDateMode;
+  window.saveEvent    = saveEvent;
+  window.deleteEvent  = deleteEvent;
+
   document.getElementById('modalOverlay').addEventListener('click', e => {
     if (e.target === document.getElementById('modalOverlay')) closeModal();
   });
