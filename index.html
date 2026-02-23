@@ -661,6 +661,11 @@
     }
 
     graphListId = match.id;
+
+    // Fetch actual column names from the list
+    const colData = await graphGet(`${GRAPH_BASE}/sites/${graphSiteId}/lists/${graphListId}/columns?$select=name,displayName`);
+    const cols = (colData.value || []).map(c => `• "${c.displayName}" (internal: ${c.name})`).join('\n');
+    console.log('List columns:\n' + cols);
     setStatus('');
   }
 
