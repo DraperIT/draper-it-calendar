@@ -53,7 +53,7 @@
   .day-cell:hover .day-add{opacity:1}
   .day-add:hover{color:var(--accent)}
   .day-events-wrap{flex:1;padding:0 4px 5px;display:flex;flex-direction:column;gap:3px;overflow:hidden}
-  .pill{border-radius:5px;padding:4px 8px 4px 7px;border-left:4px solid transparent;display:flex;align-items:center;gap:4px;position:relative;cursor:default;font-size:11px;font-weight:700;color:#fff;line-height:1.2;text-shadow:0 1px 2px rgba(0,0,0,0.4)}
+  .pill{border-radius:5px;padding:4px 8px 4px 7px;border-left:4px solid transparent;display:flex;align-items:center;gap:4px;position:relative;cursor:default;font-size:13px;font-weight:700;color:#fff;line-height:1.2;text-shadow:0 1px 2px rgba(0,0,0,0.4)}
   .pill.new-starter{background:var(--new-starter-bg);border-color:var(--new-starter)}
   .pill.leaver{background:var(--leaver-bg);border-color:var(--leaver)}
   .pill.holiday{background:var(--holiday-bg);border-color:var(--holiday)}
@@ -460,6 +460,10 @@ document.getElementById('eventDateFrom').addEventListener('change',function(){
         if(response)currentAccount=response.account;
         render();
         loadEvents().catch(function(err){setStatus('Error: '+err.message,true)});
+        // Auto-refresh every 5 minutes
+        setInterval(function(){
+          loadEvents().catch(function(err){console.warn('Auto-refresh failed:',err.message)});
+        }, 5 * 60 * 1000);
       }).catch(function(err){setStatus('Auth error: '+err.message,true)});
     };
     s.onerror=function(){tryLoad(i+1)};
@@ -468,5 +472,11 @@ document.getElementById('eventDateFrom').addEventListener('change',function(){
   tryLoad(0);
 })();
 </script>
+
+<div style="margin-top:10px;padding:6px 16px;display:flex;justify-content:space-between;align-items:center;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);border-top:1px solid var(--border);">
+  <span>Created by Keith Normington &copy; 2026 All Rights Reserved</span>
+  <span>For internal use only &middot; Data stored in Microsoft SharePoint &middot; Do not share outside the organisation</span>
+</div>
+
 </body>
 </html>
