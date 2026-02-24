@@ -19,12 +19,12 @@
   body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;padding:40px 16px 8px}
   header{display:flex;align-items:center;justify-content:space-between;margin-bottom:70px;gap:12px}
   .brand-wrap{display:flex;align-items:center;gap:10px}
-  .cyber-cat{position:relative;width:36px;height:36px;flex-shrink:0}
+  .cyber-cat{position:relative;width:52px;height:52px;flex-shrink:0}
   .cyber-cat::before{content:'';position:absolute;inset:-4px;border-radius:50%;background:radial-gradient(circle,rgba(79,142,247,0.55) 0%,rgba(79,142,247,0.18) 50%,transparent 75%);animation:catGlow 3s ease-in-out infinite;filter:blur(3px)}
   @keyframes catGlow{0%,100%{opacity:.8;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}}
-  .cyber-cat svg{width:36px;height:36px;position:relative;z-index:1;filter:drop-shadow(0 0 6px rgba(79,142,247,0.9));animation:catPulse 3s ease-in-out infinite}
+  .cyber-cat svg{width:52px;height:52px;position:relative;z-index:1;filter:drop-shadow(0 0 6px rgba(79,142,247,0.9));animation:catPulse 3s ease-in-out infinite}
   @keyframes catPulse{0%,100%{filter:drop-shadow(0 0 6px rgba(79,142,247,0.9))}50%{filter:drop-shadow(0 0 12px rgba(100,180,255,1))}}
-  .brand-title{font-size:16px;font-weight:800;letter-spacing:-0.5px;white-space:nowrap;line-height:1.15}
+  .brand-title{font-size:1rem;font-weight:700;letter-spacing:1.5px;white-space:nowrap;line-height:1.15;text-transform:uppercase;color:#ffffff;font-family:'Inter',sans-serif}
   .brand-title .dim{color:var(--muted);font-weight:400}
   .brand-subtitle{font-size:9px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-top:1px}
   .header-center{display:flex;align-items:center;gap:10px;flex:1;justify-content:center}
